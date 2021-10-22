@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  
+}
+body {
+    background: linear-gradient(45deg, #33d1ff, #3387ff);
+    height: 100vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+.inner{
+    width: 95%;
+    margin: auto;
+}
+/*design seach by title*/
+.seach_option{
+    margin: 25 0 3 0;
+    text-align: center;
+    border-bottom: 3px solid blueviolet;
+}
+.seach_by_title{
+    border-radius: 5px;
+    width: 98%;
+    margin-right: 5px;
+    text-align: right;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+}
+.input{
+    width: 90%;
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+/*
+.seach_btn{
+    background-color: royalblue;
+    width: 10%;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    margin: 0 0 0 5px;
+}
+.seach_btn .fa{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 18px;
+}*/
+.seach_by_categorie,span[class="sw3"]{
+    width: 100%; 
+    text-align: right;
+    padding: 3px;
+}
+span[class="sw3"]{
+    display: block;
+    border-bottom: 3px solid blueviolet;
+    padding-right: 3%;
+}
+.categorie .l-categorie{
+    font-weight: 400;
+    color: steelblue;
+    text-decoration: none;
+    color: blue;
+    font-weight: bolder;
+    padding: 0px;
+    margin: 0 15px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+.l-categorie:hover{
+    border-color: #ffff;
+    padding-bottom: 3px;
+}
+/*design affiche*/
+.affiche_groupe_art{
+    display: flex;
+}
+.affiche_arts{
+    margin: 5px;
+    border: 1px solid blue;
+    border-radius: 5px;
+    padding: 5px;
+}
+.info span{
+   font-size: 10px;
+   font-weight: bold; 
+}
+.contenuArt{
+    text-indent: 5px;
+}
+.g-link {
+    text-decoration: none;
+    color: #ffff;
+    font-weight: 400;
+    padding: 0px;
+    margin: 0 5px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+.action{
+    margin-top: 13px;
+}

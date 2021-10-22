@@ -1,0 +1,4 @@
+Rewrite Engine on
+RewriteRule ^articles/([0-9]+) articles.php?format=$1
+RewriteRule ^articles/([0-9]+)/([0-9]+) articles.php?&tri=$1format=$2
+RewriteRule ^articles/([0-9]+)/([0-9]+)/([0-9]+) articles.php?categorie=$1&format=$2

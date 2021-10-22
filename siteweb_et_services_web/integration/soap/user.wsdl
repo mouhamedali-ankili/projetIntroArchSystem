@@ -1,0 +1,207 @@
+<?xml version="1.0"  encoding="UTF-8" ?>
+<definitions 
+    xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" 
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema_instance"  
+    xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"  
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"      
+    xmlns="http://schemas.xmlsoap.org/wsdl/" 
+    targetNamespace="urn:serviceUtilisateurWsdl"
+    xmlns:tns="urn:serviceUtilisateurWsdl">
+    
+    <types>
+     	<xsd:schema targetNamespace="urn:serviceUtilisateurWsdl">
+       	<xsd:import namespace ="http://schemas.xmlsoap.org/soap/encoding/"/>
+         <xsd:import namespace ="http://schemas.xmlsoap.org/wsdl/"/>
+    	
+        <xsd:complexType name="utilisateur">
+          <xsd:all>
+           <xsd:element name= "id" type="xsd:int"/>
+           <xsd:element name= "nom"   type="xsd:string"/>
+           <xsd:element name= "prenom" type="xsd:string"/>
+           <xsd:element name= "adresse" type="xsd:string"/>
+           <xsd:element name= "telephone" type="xsd:long"/>
+           <xsd:element name= "email" type="xsd:string"/>
+           <xsd:element name= "mot_de_passe" type="xsd:string"/>
+           <xsd:element name= "fonction"  type="xsd:string"/>
+          </xsd:all>
+        </xsd:complexType>
+  <!--
+        <xsd:complexType name="utilisateur_ajout">
+          <xsd:all>
+           <xsd:element name= "nom"   type="xsd:string"/>
+           <xsd:element name= "prenom" type="xsd:string"/>
+           <xsd:element name= "adresse" type="xsd:string"/>
+           <xsd:element name= "telephone" type="xsd:long"/>
+           <xsd:element name= "email" type="xsd:string"/>
+           <xsd:element name= "mot_de_passe" type="xsd:string"/>
+           <xsd:element name= "fonction"  type="xsd:string"/>
+          </xsd:all>
+        </xsd:complexType>
+
+        <xsd:complexType name="listeNomUtilisateur">
+            <xsd:complexContent>
+              <xsd:restriction  base ="SOAP-ENC:Array">
+                <xsd:attribute ref  ="SOAP-ENC:arrayType" wsdl:arrayType="xsd:string[]"/>
+              </xsd:restriction>
+            </xsd:complexContent>
+        </xsd:complexType>
+  -->
+        <xsd:complexType name="listeUtilisateur">
+          <xsd:complexContent>
+            <xsd:restriction  base ="SOAP-ENC:Array">
+            <xsd:attribute ref  ="SOAP-ENC:arrayType" wsdl:arrayType="tns:utilisateur[]"/>
+            </xsd:restriction>
+          </xsd:complexContent>
+        </xsd:complexType>
+    </xsd:schema>
+  </types> 
+
+  <message name="soap_authentification_utilisateurRequest" >
+    <part name ="email" type="xsd:string"/>
+    <part name ="mot_de_passe" type="xsd:string"/>
+  </message>
+  <message name="soap_authentification_utilisateurReponse" >
+    <part name ="utilisateur" type ="tns:utilisateur"/> 
+  </message> 
+
+  <message name="soap_lister_utilisateurRequest" > 
+  </message>
+  <message name="soap_lister_utilisateurReponse" >
+    <part name ="return" type="tns:listeUtilisateur"/>
+  </message>
+
+  <message name="soap_ajouter_utilisateurRequest" >
+    <part name ="nom" type="xsd:string"/>
+    <part name ="prenom" type="xsd:string"/>
+    <part name ="adresse" type="xsd:string"/>
+    <part name ="telephone" type="xsd:long"/>
+    <part name ="email" type="xsd:string"/>
+    <part name ="mot_de_passe" type="xsd:string"/>
+    <part name ="fonction" type="xsd:string"/>
+  </message>
+  <message name="soap_ajouter_utilisateurReponse" >
+    <part name ="return" type ="xsd:boolean"/> 
+  </message>
+
+  <message name="soap_modifier_utilisateurRequest" >
+    <part name ="id" type="xsd:int"/>
+    <part name ="nom" type="xsd:string"/>
+    <part name ="prenom" type="xsd:string"/>
+    <part name ="adresse" type="xsd:string"/>
+    <part name ="telephone" type="xsd:long"/>
+    <part name ="email" type="xsd:string"/>
+    <part name ="mot_de_passe" type="xsd:string"/>
+    <part name ="fonction" type="xsd:string"/>
+	  <part name="encien_password" type ="xsd:string"/>
+	  <part name="nouveau_password" type ="xsd:string"/>
+  </message>
+  <message name="soap_modifier_utilisateurReponse" >
+  <part name ="return" type ="xsd:boolean"/> 
+  </message>
+
+  <message name="soap_supprimer_utilisateurRequest">
+    <part name ="id_utilisateur" type="xsd:int"/>
+  </message>
+  <message name="soap_supprimer_utilisateurReponse" >
+    <part name ="return" type ="xsd:boolean"/> 
+  </message>
+  
+  
+
+  <portType name = "serviceUtilisateurPortType">
+
+    <documentation> renvoie la liste des noms des utlisateurs</documentation>
+
+    <operation name="soap_authentification_utilisateur">
+      <documentation>authentification</documentation>
+      <input message="tns:soap_authentification_utilisateurRequest"/>
+      <output message ="tns:soap_authentification_utilisateurReponse"/>
+     </operation>
+
+    <operation name="soap_lister_utilisateur">
+    	<documentation> renvoie la liste des noms des utlisateurs</documentation>
+      	<input message="tns:soap_lister_utilisateurRequest"/>
+    	<output message ="tns:soap_lister_utilisateurReponse"/>
+    </operation>
+
+    <operation name="soap_ajouter_utilisateur">
+      <documentation>ajoute un utlisateur</documentation>
+      <input message="tns:soap_ajouter_utilisateurRequest"/>
+      <output message ="tns:soap_ajouter_utilisateurReponse"/>
+    </operation>
+
+    <operation name="soap_modifier_utilisateur">
+      <documentation>modifie un utlisateur</documentation>
+      <input message="tns:soap_modifier_utilisateurRequest"/>
+      <output message ="tns:soap_modifier_utilisateurReponse"/>
+    </operation>
+
+    <operation name="soap_supprimer_utilisateur">
+      <documentation>supprime un utlisateur</documentation>
+      <input message="tns:soap_supprimer_utilisateurRequest"/>
+      <output message ="tns:soap_supprimer_utilisateurReponse"/>
+    </operation>
+  </portType>
+  
+  
+  <binding name="serviceUtilisateurBinding" type ="tns:serviceUtilisateurPortType">
+    <soap:binding style ="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+    <operation name = "soap_authentification_utilisateur">
+      <soap:operation soapAction="urn:serviceUtilisateurWsdl#soap_authentification_utilisateurServeur" style="rpc"/>	
+      <input>
+        <soap:body use="encoded" namespace="urn:serviceUtilisateurWsdl"	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace ="urn:serviceUtilisateurWsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+
+    <operation name = "soap_lister_utilisateur">
+      <soap:operation soapAction="urn:serviceUtilisateurWsdl#soap_lister_utilisateurServeur" style="rpc"/>	
+      <input>
+        <soap:body use="encoded" namespace="urn:serviceUtilisateurWsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+      	<soap:body use="encoded" namespace ="urn:serviceUtilisateurWsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+
+    <operation name = "soap_modifier_utilisateur">
+      <soap:operation soapAction="urn:serviceUtilisateurWsdl#soap_modifier_utilisateurServeur" style="rpc"/>	
+      <input>
+        <soap:body use="encoded" namespace="urn:serviceUtilisateurWsdl"	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace ="urn:serviceUtilisateurWsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+
+    <operation name = "soap_ajouter_utilisateur">
+      <soap:operation soapAction="urn:serviceUtilisateurWsdl#soap_ajouter_utilisateurServeur" style="rpc"/>	
+      <input>
+      <soap:body use="encoded" namespace="urn:serviceUtilisateurWsdl"	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </input>
+      <output>
+        <soap:body use="encoded" namespace ="urn:serviceUtilisateurWsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </output>
+    </operation>
+  <operation name = "soap_supprimer_utilisateur">
+    <soap:operation soapAction="urn:serviceUtilisateurWsdl#soap_supprimer_utilisateurServeur" style="rpc"/>	
+    <input>
+      <soap:body use="encoded" namespace="urn:serviceUtilisateurWsdl"	encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+    </input>
+    <output>
+      <soap:body use="encoded" namespace ="urn:serviceUtilisateurWsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+    </output>
+  </operation>
+  </binding>
+  
+  <service name = "serviceUtilisateur">
+    <port name ="serviceUtilisateurPort" binding ="tns:serviceUtilisateurBinding">
+      <soap:address location ="http://localhost/TheNewscv2/domaine/soap.class.php" />
+    </port>
+  </service>
+</definitions>
